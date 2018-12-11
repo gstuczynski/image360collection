@@ -1,0 +1,19 @@
+{
+  "cards": [{
+      "image": "bonarka-01.jpg",
+      "preview": "bimg.jpg",
+      "title": "Część administracyjno wojskowa",
+      "content": "xxxxx"
+    },
+    {
+      "image": "bonarka3",
+      "preview": "bimg.jpg",
+      "title": "Widok z góry"
+    },
+    {
+      "sceneId": "bonarka5",
+      "preview": "bimg.jpg",
+      "title": "Skrzyżowanie"
+    }
+  ]
+}
