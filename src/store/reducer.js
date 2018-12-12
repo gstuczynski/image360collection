@@ -13,6 +13,7 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case "CHANGE_SCENE":
+      SurfacesController.disableCylinder()
       const showControls = Boolean(action.sceneProps.content)
       return {
         ...action.sceneProps,
@@ -25,6 +26,7 @@ const reducer = (state = initialState, action) => {
       break;
     case "GOTO_MAINSCENE":
       Environment.setBackgroundImage();
+      SurfacesController.enableCylinder()
     return {
       ...action.sceneProps,
       showCards: true,

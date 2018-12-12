@@ -1,7 +1,7 @@
 import { Math as VRMath,ReactInstance, Surface, Module} from 'react-360-web';
 
-const cylinderSurface = new Surface(4096, 620, Surface.SurfaceShape.Cylinder);
-const infoPanelControlButton = new Surface(200, 820, Surface.SurfaceShape.Flat);
+const cylinderSurface = new Surface(4096, 800, Surface.SurfaceShape.Cylinder);
+const infoPanelControlButton = new Surface(200, 800, Surface.SurfaceShape.Flat);
 const infoPanel = new Surface(1200, 620, Surface.SurfaceShape.Flat);
 
 class SurfacesController extends Module {
@@ -13,6 +13,14 @@ class SurfacesController extends Module {
   }
   displayInfoPanelButton(state) {
     infoPanelControlButton.setVisibility(state);
+  }
+  //if cylinderSurface have size, if this positions it cannot click anything on flatsurface, 
+  //so in scenes where flatsurfaces are interactive need to be resized to (0,0)
+  disableCylinder() {
+    cylinderSurface.resize(0, 0);
+  }
+  enableCylinder() {
+    cylinderSurface.resize(4096, 800);
   }
 }
 

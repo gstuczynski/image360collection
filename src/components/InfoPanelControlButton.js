@@ -6,14 +6,15 @@ const style = {
   infoButton: {
     width: 80, 
     height: 80, 
-    bottom: 0, 
+    bottom: 0,
     position: 'absolute'
   },
   returnButton: {
     width: 80, 
     height: 80, 
-    bottom: 0, 
-    position: 'absolute',
+    left: 80,
+    bottom: 0,
+    position: 'absolute'
   }
 }
 
@@ -42,15 +43,16 @@ class InfoPanelControlButton extends React.Component {
     <Image style={style.infoButton} source={asset('icons/iconfinder_close_32391.png')} /> :
     <Image style={style.infoButton} source={asset('icons/iconfinder_info-blog_46810.png')} />
 
-    const returnButton = <Image style={style.infoButton} source={asset('icons/iconfinder_Arrow_doodle_16_3847918.png')} />
+    const returnButton = <Image style={style.returnButton} source={asset('icons/iconfinder_Arrow_doodle_16_3847918.png')} />
     
     return(    
-      <View style={{display: 'flex', position: 'relative', width: 500, height: 800}}>
+      <View style={{display: 'flex',  width: 500, height: 800, justifyContent: 'flex-end', flexFlow: 'row'}}>
       { this.props.showControls  &&
-        <VrButton style={{position: 'absolute', bottom: 0,  right: 500}}  onClick={()=>this.handleInfoClick()} >
+        <VrButton   onClick={()=>this.handleInfoClick()} >
           {infoPanelControl}
         </VrButton>}
-{   !this.props.mainScene  &&    <VrButton style={{position: 'absolute', bottom: 0, right: 400}} onClick={()=>this.handleReturnClick()} >
+{   !this.props.mainScene  &&   
+       <VrButton style={{maxWidth: 80}} onClick={()=>this.handleReturnClick()} >
           {returnButton}
       </VrButton>}
     </View>)
