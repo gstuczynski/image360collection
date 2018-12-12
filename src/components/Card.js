@@ -7,7 +7,7 @@ class Button extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      idx : 0,
+      idx : this.props.idx,
       image: '',
       preview: '',
       title: '',

@@ -11,11 +11,12 @@ import {
   VrButton
 } from 'react-360';
 import Card from './Card'
+import { connect } from 'react-redux';
 
-export default class amazingCracow extends React.Component {
+class SceneManager extends React.Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       cards : ['aa'],
     }
@@ -49,6 +50,7 @@ export default class amazingCracow extends React.Component {
       return (
         <Card
           key={idx}
+          idx={idx}
           onClick={() => console.log(idx)}
           //title={card.title}
           //preview={card.preview}
@@ -63,9 +65,10 @@ export default class amazingCracow extends React.Component {
   render() {
     return (
       <View style={styles.panel}>
-      {/* Added this becouse 1st elements is strangely rendered - unexpected position - propably BUG */ }      
+      {/* Added this becouse 1st elements is strangely rendered - unexpected position - propably BUG */ } 
+      {console.log('this.props.showCards',this.props.showCards)}     
         <VrButton />
-        {this.renderCards(new Array(1).fill('x'))}
+        {this.props.showCards && this.renderCards(new Array(3).fill('x'))}
       </View>
     );
   }
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
     //backgroundColor: 'rgba(255, 255, 255, 0.4)',
     justifyContent: 'center',
     alignItems: 'center',
-    // position: 'relative',
+    position: 'relative',
   },
   greetingBox: {
     padding: 20,
@@ -92,4 +95,10 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('amazingCracow', () => amazingCracow);
+const mapStateToProps = state => {
+  return {
+      showCards: state.showCards
+  };
+}
+
+export default connect(mapStateToProps)(SceneManager)

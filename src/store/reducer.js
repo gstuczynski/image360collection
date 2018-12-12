@@ -1,14 +1,38 @@
+import { NativeModules, Environment } from 'react-360';
+
+const { SurfacesController } = NativeModules;
+
 const initialState = {
-  counter: 0
+  showCards: true,
+  showControls: false,
+  mainScene: true,
+  isInfoPanelOpen: false
 }
 
 const reducer = (state = initialState, action) => {
-  if(action.type==="CHANGE_SCENE"){
-    console.log('ddupa', action.sceneProps)
+
+  switch (action.type) {
+    case "CHANGE_SCENE":
+      const showControls = Boolean(action.sceneProps.content)
+      return {
+        ...action.sceneProps,
+        showCards: false,
+        showControls: showControls,
+        mainScene: false
+      }
+    case "CHANGE_INFOPANEL_STATE":
+      SurfacesController.displayInfoPanel(action.val)
+      break;
+    case "GOTO_MAINSCENE":
+      Environment.setBackgroundImage();
     return {
-      counter: state.counter + 1
+      ...action.sceneProps,
+      showCards: true,
+      showControls: false,
+      mainScene: true
     }
   }
+
   return state;
 }
 

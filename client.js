@@ -1,8 +1,20 @@
-import { Math as VRMath,ReactInstance, Surface} from 'react-360-web';
+import { Math as VRMath,ReactInstance, Surface, Module} from 'react-360-web';
 
-const cylinderSurface = new Surface(4096, 720, Surface.SurfaceShape.Cylinder);
-const infoPanelControlButton = new Surface(200, 720, Surface.SurfaceShape.Flat);
-const infoPanel = new Surface(1440, 850, Surface.SurfaceShape.Flat);
+const cylinderSurface = new Surface(4096, 620, Surface.SurfaceShape.Cylinder);
+const infoPanelControlButton = new Surface(200, 820, Surface.SurfaceShape.Flat);
+const infoPanel = new Surface(1200, 620, Surface.SurfaceShape.Flat);
+
+class SurfacesController extends Module {
+  constructor() {
+    super('SurfacesController');
+  }
+  displayInfoPanel(state) {
+    infoPanel.setVisibility(state);
+  }
+  displayInfoPanelButton(state) {
+    infoPanelControlButton.setVisibility(state);
+  }
+}
 
 
 function init(bundle, parent, options = {}) {
@@ -10,6 +22,7 @@ function init(bundle, parent, options = {}) {
 
   const r360 = new ReactInstance(bundle, parent, {
     fullScreen: true,
+    nativeModules: [new SurfacesController()],
     frame: () => {
       const cameraQuat = r360.getCameraQuaternion();
       cameraDirection[0] = 0;
@@ -27,9 +40,10 @@ function init(bundle, parent, options = {}) {
     ...options,
   });
 
+  r360.renderToSurface(r360.createRoot('images360Collection'), cylinderSurface);
+  r360.renderToSurface(r360.createRoot('infoPanel'), infoPanel);
   r360.renderToSurface(r360.createRoot('infoPanelControlButton'), infoPanelControlButton);
-  r360.renderToSurface(r360.createRoot('amazingCracow'), cylinderSurface);
-  infoPanelControlButton.setVisibility(true)
+  infoPanel.setVisibility(false);
 }
 
 
