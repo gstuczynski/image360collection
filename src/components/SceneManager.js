@@ -18,21 +18,20 @@ class SceneManager extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      cards : ['aa'],
+      cards : [],
     }
   }
 
   componentDidMount(){
-    console.log('cc')
     fetch('/static_assets/cards/cards1.json')
       .then(response => response.json())
       .then(responseData => {
+        console.log('responseData.cards', responseData.cards)
           this.setState({
             cards: responseData.cards
           })
       })
       .catch(err => console.log(err))
-
   }
 
   renderCards = (cards = []) => {
@@ -40,23 +39,23 @@ class SceneManager extends React.Component {
       top: 500,
       left: 0
     }
-    return cards.map((card, idx, cards) => {
+    return cards.map((card, idx) => {
       position.left += 200
       if (idx%4===0){
         position.top -= 100
         position.left = 0
       }
-      console.log(position)
+      console.log('sasdass',position)
       return (
         <Card
           key={idx}
           idx={idx}
-          onClick={() => console.log(idx)}
-          //title={card.title}
-          //preview={card.preview}
-          position={position}
           top={position.top}
           left={position.left}
+          image={card.image}
+          previewImg={card.previewImg}
+          title={card.title}
+          content={card.content}
         />
       );
     });
@@ -66,9 +65,8 @@ class SceneManager extends React.Component {
     return (
       <View style={styles.panel}>
       {/* Added this becouse 1st elements is strangely rendered - unexpected position - propably BUG */ } 
-      {console.log('this.props.showCards',this.props.showCards)}     
         <VrButton />
-        {this.props.showCards && this.renderCards(new Array(3).fill('x'))}
+        {this.props.showCards && this.renderCards(this.state.cards)}
       </View>
     );
   }

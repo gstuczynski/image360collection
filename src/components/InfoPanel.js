@@ -29,10 +29,9 @@ class InfoPanel extends React.Component {
   }
 
   render(){
-    console.log("ssadasd", this.state)
     return (
-      <View style={{ textAlign: 'center', width: 1200, height: 620, margin:'auto', display: 'flex', justifyContent: 'center'}}>
-        <Text style={{backgroundColor:'black', margin: 'auto',textAlign: 'center', padding: 50}}>{`${this.state.content}`}</Text>
+      <View style={{ textAlign: 'center', width: 1200, height: 620, margin:'auto', display: 'flex', justifyContent: 'center', paddingTop:'5px',backgroundColor:'black'}}>
+        <Text style={{width: 1200, height: 420, textAlign: 'center'}}>{`${this.state.content}`}</Text>
       </View>
     )
   }

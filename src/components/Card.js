@@ -1,34 +1,37 @@
 import React from 'react';
 import { StyleSheet, Text, VrButton, View, Environment, asset, staticResourceURL } from 'react-360';
 import _ from 'underscore';
+import { string, number, shape } from 'prop-types'
 import { connect } from 'react-redux';
 
-class Button extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      idx : this.props.idx,
-      image: '',
-      preview: '',
-      title: '',
-      content: '',
-    }
+class Card extends React.Component {
+  static propTypes = {
+    idx: number.isRequired,
+    image: string.isRequired,
+    preview: string,
+    title: string,
+    content: string,
+    top: number.isRequired,
+    left: number.isRequired,
   }
 
-  componentDidMount(){
-    fetch(`${asset("cards/cards1.json").uri}`)
-    .then(response => {
-      return response.json()
-    })
-    .then(response => {
-      this.setState(response.cards[this.state.idx])
-    }
-    )
+static defaultProps = {
+  preview: '',
+  title: '',
+  content: '',
+}
+
+  constructor(props){
+    super(props);
   }
 
   updateScene = () => {
-    Environment.setBackgroundImage(asset(`images/${this.state.image}`), { format: '2D' });
-    this.props.onChangeScene(this.state)
+    Environment.setBackgroundImage(asset(`images/${this.props.image}`), { format: '2D' });
+    console.log('sasaas', this.props)
+    this.props.onChangeScene({
+      title: this.props.title,
+      content: this.props.content
+    })
   };
 
   render() {
@@ -64,19 +67,10 @@ class Button extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-      image: state.image,
-      preview: state.preview,
-      title: state.title,
-      content: state.content,
-  };
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     onChangeScene: (sceneProps) => dispatch({type: 'CHANGE_SCENE', sceneProps: sceneProps})
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Button)
+export default connect(null, mapDispatchToProps)(Card)
