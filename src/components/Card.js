@@ -1,14 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, VrButton, View, Environment, asset, staticResourceURL } from 'react-360';
+import {  Text, VrButton, View, Environment, asset, Animated } from 'react-360';
 import _ from 'underscore';
-import { string, number, shape } from 'prop-types'
+import { string, number } from 'prop-types'
 import { connect } from 'react-redux';
+
+const INITIAL_PREVIEW_SIZE = 120;
+const SCALED_PREVIEW_SIZE = 300;
+const PREVIEW_ANIMATION_DURATION = 250;
 
 class Card extends React.Component {
   static propTypes = {
     idx: number.isRequired,
     image: string.isRequired,
-    preview: string,
+    previewImg: string.isRequired,
     title: string,
     content: string,
     top: number.isRequired,
@@ -16,14 +20,44 @@ class Card extends React.Component {
   }
 
 static defaultProps = {
-  preview: '',
   title: '',
   content: '',
 }
 
   constructor(props){
     super(props);
+    this.state = {
+      isOverButton: false,
+      isOverPreview: false,
+      previewSize: new Animated.Value(INITIAL_PREVIEW_SIZE),
+    };
   }
+
+  handlePreviewEnter = () => {
+    Animated.timing(this.state.previewSize, {
+      toValue: SCALED_PREVIEW_SIZE,
+      duration: PREVIEW_ANIMATION_DURATION,
+    }).start();
+
+    this.setState({ isOverPreview: true });
+  };
+
+  handlePreviewExit = () => {
+    Animated.timing(this.state.previewSize, {
+      toValue: INITIAL_PREVIEW_SIZE,
+      duration: PREVIEW_ANIMATION_DURATION,
+    }).start();
+
+    this.setState({ isOverPreview: false });
+  };
+
+  handleButtonEnter = () => {
+    this.setState({ isOverButton: true });
+  };
+
+  handleButtonExit = () => {
+    this.setState({ isOverButton: false });
+  };
 
   updateScene = () => {
     Environment.setBackgroundImage(asset(`images/${this.props.image}`), { format: '2D' });
@@ -36,32 +70,32 @@ static defaultProps = {
 
   render() {
     this.styles = {
-      button: {
-        margin: 5,
-        height: 60,
-        width: 120,
-        backgroundColor: 'red',
+      image: {
+        top: 0,
+        borderColor: 'rgba(255, 255, 255, 1)',
         position: 'absolute',
-        top: this.props.top,
-        left: this.props.left
-      },
-      button2: {
-        margin: 5,
-        height: 60,
-        width: 120,
-        backgroundColor: 'yellow',
-        position: 'absolute',
-        top: 50,
-        left: 50
-      },
-      text: {
-        fontSize: 10,
-        textAlign: 'center',
+        zIndex: -1
       },
     };
+
     return (
-      <VrButton style={this.styles.button} onClick={() => this.updateScene()} >
-        <Text style={this.styles.text}>TEST</Text>
+      <VrButton onClick={() => this.updateScene() } onEnter={this.handleButtonEnter}           onExit={this.handleButtonExit}
+      >
+{ Boolean(this.props.previewImg) &&       <Animated.Image
+            source={asset(`previewImages/${this.props.previewImg}`)}
+            onEnter={this.handlePreviewEnter}
+            onExit={this.handlePreviewExit}
+            style={[
+              this.styles.image,
+              {
+                width: this.state.previewSize,
+                height: this.state.previewSize,
+                borderWidth: this.state.isOverPreview ? 1 : 0,
+                borderRadius: this.state.isOverPreview ? 150 : 60,
+                top: this.state.isOverPreview ? this.props.top - 50  : this.props.top,
+                left: this.state.isOverPreview ? this.props.left - 50  : this.props.left,              }
+            ]}
+          />}
       </VrButton>
     );
   }

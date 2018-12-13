@@ -1,29 +1,29 @@
 {
   "cards": [{
       "image": "bonarka-01.jpg",
-      "preview": "bimg.jpg",
+      "previewImg": "bimg.jpg",
       "title": "Część administracyjno wojskowa",
       "content": "xxxzx zxzxas sad dw ww w  wwwwd wd d wxx"
     },
     {
       "image": "bonarka-02.jpg",
-      "preview": "bimg.jpg",
+      "previewImg": "bimg.jpg",
       "title": "Widok z góry",
       "content": "xxssssssxxx"
     },
     {
       "image": "bonarka-03.jpg",
-      "preview": "bimg.jpg",
+      "previewImg": "bimg.jpg",
       "title": "Skrzyżowanie"
     },
     {
       "image": "bonarka-04.jpg",
-      "preview": "bimg.jpg",
+      "previewImg": "bimg.jpg",
       "title": "Skrzyżowanie"
     },
     {
       "image": "bonarka-05.jpg",
-      "preview": "bimg.jpg",
+      "previewImg": "bimg.jpg",
       "title": "Skrzyżowanie"
     }
   ]

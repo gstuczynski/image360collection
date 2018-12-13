@@ -36,14 +36,14 @@ class SceneManager extends React.Component {
 
   renderCards = (cards = []) => {
     let position = {
-      top: 500,
-      left: 0
+      top: 1000,
+      left: 100
     }
     return cards.map((card, idx) => {
-      position.left += 200
+      position.left += 250
       if (idx%4===0){
-        position.top -= 100
-        position.left = 0
+        position.top -= 250
+        position.left = 100
       }
       console.log('sasdass',position)
       return (

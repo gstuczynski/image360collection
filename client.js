@@ -1,6 +1,6 @@
 import { Math as VRMath,ReactInstance, Surface, Module} from 'react-360-web';
 
-const cylinderSurface = new Surface(4096, 800, Surface.SurfaceShape.Cylinder);
+const cylinderSurface = new Surface(4296, 1200, Surface.SurfaceShape.Cylinder);
 const infoPanelControlButton = new Surface(200, 800, Surface.SurfaceShape.Flat);
 const infoPanel = new Surface(1200, 620, Surface.SurfaceShape.Flat);
 
