@@ -23,7 +23,7 @@ class SceneManager extends React.Component {
   }
 
   componentDidMount(){
-    fetch('/static_assets/cards/cards1.json')
+    fetch(asset('cards/cards1.json').uri)
       .then(response => response.json())
       .then(responseData => {
         console.log('responseData.cards', responseData.cards)
