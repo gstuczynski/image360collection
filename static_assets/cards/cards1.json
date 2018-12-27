@@ -27,9 +27,39 @@
       "title": "Skrzyżowanie"
     },
     {
-      "image": "uzgorod1.jpg",
-      "previewImg": "uzhorod1.jpg",
-      "title": "Zamek w Użhorodzie"
+      "image": "pomnik_ofiar_katynia.JPG",
+      "previewImg": "pomnik_ofiar_katynia.png",
+      "title": "Pomnik Ofiar Katynia"
+    },
+    {
+      "image": "park_decjusza.JPG",
+      "previewImg": "park_decjusza.png",
+      "title": "Park Decjusza"
+    },
+    {
+      "image": "dab_bartek.JPG",
+      "previewImg": "dab_bartek.png",
+      "title": "Dąb Bartek"
+    },
+    {
+      "image": "dab_bartek.JPG",
+      "previewImg": "dab_bartek.png",
+      "title": "Dąb Bartek"
+    },
+    {
+      "image": "opera_lwowska.JPG",
+      "previewImg": "opera_lwowska.png",
+      "title": "Opera Lwowska"
+    },
+    {
+      "image": "deptak_opera_lwowska.JPG",
+      "previewImg": "deptak_opera_lwowska.png",
+      "title": "Deptak Opera Lwowska"
+    },
+    {
+      "image": "uzhorod_zamek.JPG",
+      "previewImg": "uzhorod_zamek.png",
+      "title": "Opera Lwowska"
     }
   ]
 }
