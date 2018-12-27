@@ -60,7 +60,7 @@ class Card extends React.Component {
   };
 
   updateScene = () => {
-    Environment.setBackgroundImage('https://goo.gl/maps/9RFCYVWb7YG2');
+    Environment.setBackgroundImage('https://kuula.co/share/7YNXq');
     this.props.onChangeScene({
       title: this.props.title,
       content: this.props.content
